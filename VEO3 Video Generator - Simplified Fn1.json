@@ -1,0 +1,623 @@
+{
+  "name": "VEO3 Video Generator - Simplified Fn1",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "f1795164-3e77-4499-9969-29fcd43a5d00",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk",
+          "mode": "list",
+          "cachedResultName": "03. video111",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Trang tính1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        192,
+        0
+      ],
+      "id": "b534dbf0-0a39-42ef-ba97-91a78e8dbcff",
+      "name": "Read Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R1KMIqvGZyG29VPd",
+          "name": "Google Sheets account_nhuan"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "filter-condition",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "Run",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        400,
+        0
+      ],
+      "id": "5f3cda28-10c9-4589-8fd4-23d1458d24c0",
+      "name": "Filter: Only Run Status"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk",
+          "mode": "list",
+          "cachedResultName": "03. video111",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Trang tính1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "Status": "Run",
+            "Promt": "={{ $json.Promt }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Promt",
+              "displayName": "Promt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        608,
+        0
+      ],
+      "id": "08e66e56-8048-4866-b92d-9c6d528e0842",
+      "name": "Update Status to Pro",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R1KMIqvGZyG29VPd",
+          "name": "Google Sheets account_nhuan"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5cedc3de-6221-4d7e-a6c8-82f4cb9cf0e9",
+              "name": "PROJECT_ID",
+              "type": "string",
+              "value": "prn8n-457809"
+            },
+            {
+              "id": "90019751-e2d5-4764-9bf9-e13916dcc528",
+              "name": "MODEL_VERSION",
+              "type": "string",
+              "value": "veo-3.0-generate-preview"
+            },
+            {
+              "id": "67ab205c-82b3-4263-99c4-c906a0ca6ae9",
+              "name": "LOCATION",
+              "type": "string",
+              "value": "us-central1"
+            },
+            {
+              "id": "413415fb-60c5-4d0d-ac45-1e6178a55227",
+              "name": "TEXT_PROMPT",
+              "type": "string",
+              "value": "={{ $json.Promt || $json.Prompt || $json.A || $json['A'] || '' }}"
+            },
+            {
+              "id": "bf0910e1-b757-4852-9341-a7792161f89b",
+              "name": "ACCESS_TOKEN",
+              "type": "string",
+              "value": "ya29.a0ATi6K2uscfaIwu8dlcJ7ZqPD1TvWHxUCFbNrsgdxeZRNUCDf8-vYDDOmox9af4X1oby0NXOH0MJaDpx0J0vC6qXx4vqVi9Cx1h9e3GagoHdsRISLKIFFNpg7LZd-GQrp31vNdYQ_aPtWSoLz838G-cl-oCHGqQIlsBPG9V3b_qHM9cayO5zTsyDqE5ymKc8xWpUhnCfWnXDeQhwc9C0BXwKMskzAUfM7vDCfaxvo4e5ivVr33sClMn5hTg9HOe9Xh8OVa5FOnsjd4WEuCOWXVU0XIe25vdFEVvmoTiQct91Grumd7hwh42Xant_rNwuK4vNVQUJAztnDHmKZtwS4Vy9fswBzsJtgB-RMaCgYKAc8SARASFQHGX2Mi7ebu-Yw1--Jgn7BUs1IO0Q0363"
+            },
+            {
+              "id": "17954335-b96b-4813-9c4a-20817d675448",
+              "name": "API_ENDPOINT",
+              "type": "string",
+              "value": "us-central1-aiplatform.googleapis.com"
+            },
+            {
+              "id": "row-data",
+              "name": "ROW_DATA",
+              "type": "object",
+              "value": "={{ $json }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a48c312d-e628-4b2f-994c-7176331b9a73",
+      "name": "Setting",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        800,
+        0
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://{{ $json.API_ENDPOINT }}/v1/projects/{{ $json.PROJECT_ID }}/locations/{{ $json.LOCATION }}/publishers/google/models/{{ $json.MODEL_VERSION }}:predictLongRunning",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.ACCESS_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"endpoint\": \"projects/prn8n-457809/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-preview\",\n  \"instances\": [\n    {\n      \"prompt\": {{ JSON.stringify($json.TEXT_PROMPT) }}\n    }\n  ],\n  \"parameters\": {\n    \"aspectRatio\": \"9:16\",\n    \"sampleCount\": 1,\n    \"durationSeconds\": \"8\",\n    \"personGeneration\": \"allow_all\",\n    \"addWatermark\": true,\n    \"includeRaiReason\": true,\n    \"generateAudio\": true\n  }\n}\n",
+        "options": {}
+      },
+      "id": "38cf2433-7c47-4a98-aabf-6be574732ea9",
+      "name": "Vertex AI-VEO",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1008,
+        0
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "id": "8ca06421-6a89-422c-8e31-73a6c1b2c06c",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        1200,
+        0
+      ],
+      "typeVersion": 1.1,
+      "webhookId": "ca4136c0-182a-43e0-b234-079ffe826eea"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://{{ $('Setting').item.json.API_ENDPOINT }}/v1/projects/{{ $('Setting').item.json.PROJECT_ID }}/locations/{{ $('Setting').item.json.LOCATION }}/publishers/google/models/{{ $('Setting').item.json.MODEL_VERSION }}:fetchPredictOperation",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Setting').item.json.ACCESS_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"operationName\": \"{{ $json.name }}\"\n}\n",
+        "options": {}
+      },
+      "id": "e17317a8-6b93-4364-af18-6f7a1b2cdbd5",
+      "name": "Vertex AI-fetch",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1408,
+        0
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-video-ready",
+              "leftValue": "={{ $json.response && $json.response.videos && $json.response.videos[0] && $json.response.videos[0].bytesBase64Encoded ? 'ready' : 'not_ready' }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        1600,
+        0
+      ],
+      "id": "0fd2bfce-f9e0-41af-9393-cf59bbe2d915",
+      "name": "Check Video Ready"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "response.videos[0].bytesBase64Encoded",
+        "options": {}
+      },
+      "id": "d1e4b3a5-1a22-4b5f-be83-74e0fec4fcd2",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "position": [
+        1808,
+        0
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "name": "=video-{{ $now.toFormat('yyyy-MM-dd-HHmmss') }}.mp4",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "18pR1g1GcRCgMTb_-S0tcxFsv-MEIl_YD",
+          "mode": "list",
+          "cachedResultName": "01. Video_N8n",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/18pR1g1GcRCgMTb_-S0tcxFsv-MEIl_YD"
+        },
+        "options": {}
+      },
+      "id": "3b865f51-c03b-4f56-9d63-96915cfe6e39",
+      "name": "Upload file",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        2016,
+        0
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "FTuXsrSQQ8oq1vt5",
+          "name": "Google Drive account_Nhuan"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk",
+          "mode": "list",
+          "cachedResultName": "03. video111",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Trang tính1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1q2fhGVamx5-l2_IoMTKdjMbl2e-_CBizfKbw2N0kYVk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Update Status to Pro').item.json.row_number }}",
+            "Status": "Success",
+            "Link": "={{ $('Upload file').item.json.webViewLink }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Promt",
+              "displayName": "Promt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2224,
+        0
+      ],
+      "id": "d6bfbf4b-2ab8-49bd-a404-8fadb7a20d26",
+      "name": "Update Status to Success",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R1KMIqvGZyG29VPd",
+          "name": "Google Sheets account_nhuan"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter: Only Run Status": {
+      "main": [
+        [
+          {
+            "node": "Update Status to Pro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Status to Pro": {
+      "main": [
+        [
+          {
+            "node": "Setting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setting": {
+      "main": [
+        [
+          {
+            "node": "Vertex AI-VEO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vertex AI-VEO": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Vertex AI-fetch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vertex AI-fetch": {
+      "main": [
+        [
+          {
+            "node": "Check Video Ready",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Video Ready": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Update Status to Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Filter: Only Run Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "07a412db-05da-4018-8eff-2f6f96929c56",
+  "meta": {
+    "instanceId": "8ae9064574590f4bef62fe6c8cafaae52a5a90dd40cb184103af1049753a2d5d"
+  },
+  "id": "zQSWKdAseO2kYh1j",
+  "tags": []
+}
